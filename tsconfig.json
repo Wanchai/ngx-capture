@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-capture": [
+        "dist/ngx-capture"
+      ],
+      "ngx-capture/*": [
+        "dist/ngx-capture/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

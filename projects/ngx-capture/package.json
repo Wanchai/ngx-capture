@@ -1,0 +1,28 @@
+{
+  "name": "ngx-capture",
+  "version": "0.0.1",
+  "description": "Screen capture library for Angular",
+  "author": "Thomas Malicet",
+  "keywords": [
+    "angular",
+    "angular 2",
+    "image",
+    "screen capture",
+    "ngx-capture",
+    "capture"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Wanchai/ngx-capture",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wanchai/ngx-capture.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Wanchai/ngx-capture/issues"
+  },
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "html2canvas": "^1.0.0-rc.3"
+  }
+}
