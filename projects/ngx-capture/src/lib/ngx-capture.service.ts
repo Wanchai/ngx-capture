@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-// import html2canvas from 'html2canvas';
-declare var html2canvas: any;
+import html2canvas from 'html2canvas';
+// declare var html2canvas: any;
+// import * as html2canvas_ from 'html2canvas';
+
+// const html2canvas = html2canvas_;
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +50,7 @@ export class NgxCaptureService {
     // this.saveImage(true);
   }
 
-  getImage(screen: HTMLElement, fullCapture?: boolean) {
+  getImage(screen: HTMLElement, fullCapture?: boolean): Promise<string> {
     // console.log(source.style.width);
     let options = {
       logging: false
@@ -58,10 +61,11 @@ export class NgxCaptureService {
       return;
     }
 
-    html2canvas(screen, options).then(canv => {
+    return html2canvas(screen, options).then(canv => {
       const img = canv.toDataURL('image/png');
+
       // this.resultImage.emit(img);
-      return img;
+      return Promise.resolve(img);
 
       // this
       //   .http
@@ -79,6 +83,10 @@ export class NgxCaptureService {
       // this.downloadLink.nativeElement.download = 'test.png';
       // // this.downloadLink.nativeElement.click();
       // console.log(this.download.nativeElement);
+    }, err => {
+      throw new Error(err);
+    }).catch(res => {
+      throw new Error(res);
     });
   }
 

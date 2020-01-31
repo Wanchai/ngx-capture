@@ -23,6 +23,7 @@
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14",
-    "html2canvas": "^1.0.0-rc.3"
+    "html2canvas": "1.0.0-rc.1",
+    "@types/html2canvas": "0.0.35"
   }
 }

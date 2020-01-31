@@ -1,6 +1,6 @@
 {
   "name": "ang-lib",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,10 +19,10 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "html2canvas": "^1.0.0-rc.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
-    "zone.js": "~0.9.1",
-    "html2canvas": "^1.0.0-rc.3"
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.23",
