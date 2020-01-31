@@ -1,24 +1,73 @@
-# NgxCapture
+# NGX-CAPTURE
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
+Screen capture library for Angular.
+Define a zone and it will capture it and return a string containing a base64 PNG.
 
-## Code scaffolding
 
-Run `ng generate component component-name --project ngx-capture` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-capture`.
-> Note: Don't forget to add `--project ngx-capture` or else it will be added to the default project in your `angular.json` file. 
+Tested with Angular 8
 
-## Build
+## Exemple 
 
-Run `ng build ngx-capture` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Install
+```
+npm install ngx-capture
+```
 
-## Publishing
 
-After building your library with `ng build ngx-capture`, go to the dist folder `cd dist/ngx-capture` and run `npm publish`.
+```ts
+import { NgModule } from '@angular/core';
+import { NgxCaptureModule } from 'ngx-capture';
 
-## Running unit tests
+@NgModule({
+  ...
+  imports: [
+    ...
+    NgxCaptureModule,
+  ],
+})
+export class AppModule {}
+```
 
-Run `ng test ngx-capture` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### For a full element capture, use the service:
 
-## Further help
+Template side:
+```html
+<div #screen>
+  <h1>Hey!</h1>
+  <p>some content</p>
+</div>
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+TS side:
+```ts
+import { NgxCaptureService } from '@ngx-capture';
+...
+@ViewChild('screen', { static: true }) screen: any;
+
+... 
+
+this.captureService.getImage(this.screen.nativeElement, true).then(img => {
+  console.log(img);
+});
+```
+### To access crop options, use the component
+
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app',
+  template: `
+    ...
+    <ngx-capture [target]="screen" (resultImage)="saveImage($event)"></ngx-capture>
+  `,
+})
+export class AppComponent {
+
+  saveImage(img: string) {
+    console.log(img);
+  }
+
+}
+```
+

@@ -1,0 +1,14 @@
+.overlay {
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  background-color: rgba(204, 204, 204, 0.1);
+  width: 100vw;
+  height: 100vh;
+  // display: none;
+}
+
+.rectangle {
+  border: 1px solid #ff0000;
+  position: absolute;
+}
