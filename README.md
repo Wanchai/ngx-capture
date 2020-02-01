@@ -3,6 +3,7 @@
 Screen capture library for Angular.
 Define a zone and it will capture it and return a string containing a base64 PNG.
 
+[Stackblitz Example](https://stackblitz.com/edit/ngx-capture-example)
 
 Tested with Angular 8
 
@@ -40,7 +41,7 @@ Template side:
 
 TS side:
 ```ts
-import { NgxCaptureService } from '@ngx-capture';
+import { NgxCaptureService } from 'ngx-capture';
 ...
 @ViewChild('screen', { static: true }) screen: any;
 
