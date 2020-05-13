@@ -5,7 +5,8 @@ Define a zone and it will capture it and return a string containing a base64 PNG
 
 [Stackblitz Example](https://stackblitz.com/edit/ngx-capture-example)
 
-Tested with Angular 8
+Angular 8 > npm install ngx-capture@0.0.3-alpha
+Angular 9 > npm install ngx-capture@0.0.4-beta
 
 ## Exemple 
 
