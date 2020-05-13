@@ -1,6 +1,6 @@
 {
   "name": "ngx-capture",
-  "version": "0.0.3-alpha",
+  "version": "0.0.4-beta",
   "description": "Screen capture library for Angular",
   "author": "Thomas Malicet",
   "keywords": [
@@ -25,7 +25,7 @@
     "@types/html2canvas": "0.0.35"
   },
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0"
+    "@angular/common": "^9.1.6",
+    "@angular/core": "^9.1.6"
   }
 }

@@ -15,7 +15,12 @@
             "tsConfig": "projects/ngx-capture/tsconfig.lib.json",
             "project": "projects/ngx-capture/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-capture/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
