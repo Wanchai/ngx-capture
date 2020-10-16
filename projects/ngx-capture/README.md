@@ -9,13 +9,14 @@ Angular 8 > `npm install ngx-capture@0.0.3-alpha`
 
 Angular 9 > `npm install ngx-capture@0.0.4-beta`
 
+Angular 10 > `npm install ngx-capture@0.10.0`
+
 ## Exemple 
 
 ### Install
 ```
 npm install ngx-capture
 ```
-
 
 ```ts
 import { NgModule } from '@angular/core';
@@ -31,9 +32,8 @@ import { NgxCaptureModule } from 'ngx-capture';
 export class AppModule {}
 ```
 
-### For a full element capture, use the service:
 
-Template side:
+Define the screen capture area with a variable (#screen):
 ```html
 <div #screen>
   <h1>Hey!</h1>
@@ -41,7 +41,8 @@ Template side:
 </div>
 ```
 
-TS side:
+### For a full element capture, use the service:
+
 ```ts
 import { NgxCaptureService } from 'ngx-capture';
 ...
@@ -73,4 +74,3 @@ export class AppComponent {
 
 }
 ```
-

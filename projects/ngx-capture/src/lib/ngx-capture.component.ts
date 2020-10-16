@@ -1,4 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 import { NgxCaptureService } from './ngx-capture.service';
 
 @Component({
@@ -39,6 +41,8 @@ export class NgxCaptureComponent implements OnInit {
     startY: 0
   };
 
+  destroy$ = new Subject<void>();
+
   constructor(private captureService: NgxCaptureService) { }
 
   ngOnInit() {
@@ -46,7 +50,6 @@ export class NgxCaptureComponent implements OnInit {
     //   console.warn('"captureZone" is not set');
     //   return;
     // }
-
 
     setTimeout(() => {
       this.rect = this.rectangle.nativeElement;
@@ -115,9 +118,12 @@ export class NgxCaptureComponent implements OnInit {
 
     this.captureService
       .getImage(this.target, false, this.cropDimensions)
-      .then(img => {
-        this.resultImage.emit(img);
-      });
+      .pipe(
+        take(1),
+        tap(img => {
+          this.resultImage.emit(img);
+        })
+      ).subscribe();
 
     this.cropDimensions = {
       x: 0,
