@@ -1,6 +1,6 @@
 {
   "name": "ngx-capture",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Screen capture library for Angular",
   "author": "Thomas Malicet",
   "keywords": [
@@ -11,7 +11,7 @@
     "ngx-capture",
     "capture"
   ],
-  "license": "MIT",
+  "license": "BEERWARE",
   "homepage": "https://github.com/Wanchai/ngx-capture",
   "repository": {
     "type": "git",
