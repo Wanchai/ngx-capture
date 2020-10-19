@@ -9,7 +9,9 @@ Angular 8 > `npm install ngx-capture@0.0.3-alpha`
 
 Angular 9 > `npm install ngx-capture@0.0.4-beta`
 
-Angular 10 > `npm install ngx-capture@0.10.0`
+Angular 10 > `npm install ngx-capture`
+
+💪 If you like this library, please [send a message here](https://twiiter.com/tmalicet) to tell me!
 
 ## Exemple 
 
@@ -49,10 +51,12 @@ import { NgxCaptureService } from 'ngx-capture';
 @ViewChild('screen', { static: true }) screen: any;
 
 ... 
-
-this.captureService.getImage(this.screen.nativeElement, true).then(img => {
-  console.log(img);
-});
+this.captureService.getImage(this.screen.nativeElement, true)
+.pipe(
+  tap(img => {
+    console.log(img);
+  })
+).subscribe();
 ```
 ### To access crop options, use the component
 
