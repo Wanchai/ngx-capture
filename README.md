@@ -11,7 +11,7 @@ Angular 9 > `npm install ngx-capture@0.0.4-beta`
 
 Angular 10 > `npm install ngx-capture`
 
-💪 If you like this library, please [send a message here](https://twiiter.com/tmalicet) to tell me!
+💪 If you like this library, please [send a message here](https://twitter.com/tmalicet) to tell me!
 
 ## Exemple 
 
