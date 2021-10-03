@@ -10,7 +10,7 @@
       "prefix": "ngx",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ngx-capture/tsconfig.lib.json",
             "project": "projects/ngx-capture/ng-package.json"
@@ -30,14 +30,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ngx-capture/tsconfig.lib.json",
-              "projects/ngx-capture/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/ngx-capture/**/*.ts",
+              "projects/ngx-capture/**/*.html"
             ]
           }
         }
@@ -147,5 +144,8 @@
       }
     }
   },
-  "defaultProject": "ngx-capture"
+  "defaultProject": "ngx-capture",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

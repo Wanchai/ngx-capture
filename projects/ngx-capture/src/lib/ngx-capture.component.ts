@@ -101,7 +101,7 @@ export class NgxCaptureComponent implements OnInit {
   }
 
   private setMousePosition(e: any) {
-    // tslint:disable-next-line: deprecation
+    // eslint-disable-next-line import/no-deprecated
     const ev = e || window.event; // Moz || IE
     if (ev.pageX) { // Moz
       this.mouse.x = ev.pageX + window.pageXOffset;
