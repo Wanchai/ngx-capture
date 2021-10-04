@@ -11,7 +11,7 @@ Angular 9 > `npm install ngx-capture@0.0.4-beta`
 
 Angular 10+ > `npm install ngx-capture`
 
-💪 If you like this library, please [send a message here](https://twitter.com/tmalicet) to tell me!
+💪 If you like this library, [you can buy me a coffee here!](https://ko-fi.com/wanchai_coding)
 
 ## Exemple
 
@@ -63,16 +63,13 @@ this.captureService.getImage(this.screen.nativeElement, true)
 ### To access crop options, use the component
 
 ```ts
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "app",
+  selector: 'app',
   template: `
     ...
-    <ngx-capture
-      [target]="screen"
-      (resultImage)="saveImage($event)"
-    ></ngx-capture>
+    <ngx-capture [target]="screen" (resultImage)="saveImage($event)"></ngx-capture>
   `,
 })
 export class AppComponent {

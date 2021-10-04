@@ -3,19 +3,20 @@
 Screen capture library for Angular.
 Define a zone and it will capture it and return a string containing a base64 PNG.
 
-[Stackblitz Example](https://stackblitz.com/edit/ngx-capture-example)
+[Stackblitz Example](https://ngx-capture-example-12.stackblitz.io)
 
 Angular 8 > `npm install ngx-capture@0.0.3-alpha`
 
 Angular 9 > `npm install ngx-capture@0.0.4-beta`
 
-Angular 10 > `npm install ngx-capture`
+Angular 10+ > `npm install ngx-capture`
 
-💪 If you like this library, please [send a message here](https://twitter.com/tmalicet) to tell me!
+💪 If you like this library, [you can buy me a coffee here!](https://ko-fi.com/wanchai_coding)
 
-## Exemple 
+## Exemple
 
 ### Install
+
 ```
 npm install ngx-capture
 ```
@@ -35,6 +36,7 @@ export class AppModule {}
 ```
 
 Define the screen capture area with a variable (#screen):
+
 ```html
 <div #screen>
   <h1>Hey!</h1>
@@ -49,7 +51,7 @@ import { NgxCaptureService } from 'ngx-capture';
 ...
 @ViewChild('screen', { static: true }) screen: any;
 
-... 
+...
 this.captureService.getImage(this.screen.nativeElement, true)
 .pipe(
   tap(img => {
@@ -57,6 +59,7 @@ this.captureService.getImage(this.screen.nativeElement, true)
   })
 ).subscribe();
 ```
+
 ### To access crop options, use the component
 
 ```ts
@@ -70,10 +73,8 @@ import { Component } from '@angular/core';
   `,
 })
 export class AppComponent {
-
   saveImage(img: string) {
     console.log(img);
   }
-
 }
 ```

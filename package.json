@@ -1,11 +1,10 @@
 {
   "name": "ang-lib",
-  "version": "0.10.3",
+  "version": "0.12.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo",
     "build": "ng build",
-    "build2": "ng-packagr -p projects/ngx-capture/package.json",
     "b-p": "ng build ngx-capture --prod && cd dist/ngx-capture && npm publish",
     "test": "ng test",
     "lint": "ng lint",

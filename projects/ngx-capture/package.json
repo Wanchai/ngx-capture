@@ -1,6 +1,6 @@
 {
   "name": "ngx-capture",
-  "version": "0.10.3",
+  "version": "0.12.0",
   "description": "Screen capture library for Angular",
   "author": "Thomas Malicet",
   "keywords": [
