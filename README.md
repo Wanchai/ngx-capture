@@ -13,7 +13,7 @@ Angular 10+ > `npm install ngx-capture`
 
 💪 If you like this library, [you can buy me a coffee here!](https://ko-fi.com/wanchai_coding)
 
-## Exemple
+## Example
 
 ### Install
 
