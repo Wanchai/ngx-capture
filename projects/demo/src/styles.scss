@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+body,
+p {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 18px;
+}
+.overlay {
+  background-color: rgba(204, 204, 204, 0.4);
+}
+.block {
+  background-color: rgba(120, 204, 204);
+  width: 100%;
+  height: 600px;
+}

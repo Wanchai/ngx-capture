@@ -1,20 +1,23 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { NgxCaptureService } from './ngx-capture.service';
 
+type Point = {
+  x: number;
+  y: number;
+};
 @Component({
   selector: 'ngx-capture',
   template: `
-  <ng-content></ng-content>
-  <div class="overlay" #over>
-    <div class="rectangle" #rect></div>
-  </div>
+    <ng-content></ng-content>
+    <div class="overlay" #over>
+      <div class="rectangle" #rect></div>
+    </div>
   `,
-  styleUrls: ['./ngx-capture.component.scss']
+  styleUrls: ['./ngx-capture.component.scss'],
 })
 export class NgxCaptureComponent implements OnInit {
-
   @ViewChild('rect', { static: true }) rectangle: ElementRef;
   @ViewChild('over', { static: true }) overlay: ElementRef;
 
@@ -27,39 +30,111 @@ export class NgxCaptureComponent implements OnInit {
 
   isDrawing = false;
 
+  mouseStart: Point = { x: 0, y: 0 };
+
   cropDimensions = {
     x: 0,
     y: 0,
     width: 0,
-    height: 0
-  };
-
-  mouse = {
-    x: 0,
-    y: 0,
-    startX: 0,
-    startY: 0
+    height: 0,
   };
 
   destroy$ = new Subject<void>();
 
-  constructor(private captureService: NgxCaptureService) { }
+  constructor(private captureService: NgxCaptureService) {}
 
   ngOnInit() {
-    // if (!this.captureZone) {
-    //   console.warn('"captureZone" is not set');
-    //   return;
-    // }
-
     setTimeout(() => {
       this.rect = this.rectangle.nativeElement;
       this.captureZone = this.overlay.nativeElement;
+
+      if (!this.captureZone) {
+        console.warn('"captureZone" is not set');
+        return;
+      }
 
       this.captureZone.onmousedown = (e) => this.startCapture(e);
       this.captureZone.onmousemove = (e) => this.drawRect(e);
       this.captureZone.onmouseup = () => this.endCapture();
     }, 2000);
+  }
 
+  private startCapture(e: any) {
+    const mouse = this.setMousePosition(e, true);
+
+    this.isDrawing = true;
+
+    this.cropDimensions = {
+      x: mouse.x,
+      y: mouse.y,
+      width: 0,
+      height: 0,
+    };
+
+    this.captureZone.style.cursor = 'crosshair';
+  }
+
+  private drawRect(e: any) {
+    if (this.isDrawing) {
+      const mouse = this.setMousePosition(e, false);
+
+      this.cropDimensions = {
+        x: mouse.x - this.mouseStart.x < 0 ? mouse.x : this.mouseStart.x,
+        y: mouse.y - this.mouseStart.y < 0 ? mouse.y : this.mouseStart.y,
+        width: Math.abs(mouse.x - this.mouseStart.x),
+        height: Math.abs(mouse.y - this.mouseStart.y),
+      };
+      this.setRectangle();
+    }
+  }
+
+  private setMousePosition(e: any, isStart = false) {
+    const ev = e || window.event; // Moz || IE
+    const mouse: Point = { x: 0, y: 0 };
+
+    if (ev.pageX) {
+      // Moz
+      mouse.x = ev.clientX;
+      mouse.y = ev.clientY;
+    } else if (ev.clientX) {
+      // IE
+      mouse.x = ev.clientX + document.body.scrollLeft;
+      mouse.y = ev.clientY + document.body.scrollTop;
+    }
+
+    if (isStart) {
+      this.mouseStart.x = mouse.x;
+      this.mouseStart.y = mouse.y;
+    }
+
+    return mouse;
+  }
+
+  private endCapture() {
+    this.captureZone.style.cursor = 'default';
+    this.isDrawing = false;
+
+    this.captureService
+      .getImage(this.target, false, {
+        ...this.cropDimensions,
+        x: this.cropDimensions.x + window.scrollX,
+        y: this.cropDimensions.y + window.scrollY,
+      })
+      .pipe(
+        take(1),
+        tap((img) => {
+          this.resultImage.emit(img);
+        })
+      )
+      .subscribe();
+
+    this.cropDimensions = {
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
+    };
+    this.setRectangle();
   }
 
   private setRectangle() {
@@ -68,70 +143,4 @@ export class NgxCaptureComponent implements OnInit {
     this.rect.style.width = this.cropDimensions.width + 'px';
     this.rect.style.height = this.cropDimensions.height + 'px';
   }
-
-  private startCapture(e: any) {
-    this.setMousePosition(e);
-
-    this.isDrawing = true;
-
-    this.mouse.startX = this.mouse.x;
-    this.mouse.startY = this.mouse.y;
-    this.cropDimensions = {
-      x: this.mouse.x,
-      y: this.mouse.y,
-      width: 0,
-      height: 0,
-    };
-
-    this.setRectangle();
-    this.captureZone.style.cursor = 'crosshair';
-  }
-
-  private drawRect(e: any) {
-    if (this.isDrawing) {
-      this.setMousePosition(e);
-      this.cropDimensions = {
-        x: (this.mouse.x - this.mouse.startX < 0) ? this.mouse.x : this.mouse.startX,
-        y: (this.mouse.y - this.mouse.startY < 0) ? this.mouse.y : this.mouse.startY,
-        width: Math.abs(this.mouse.x - this.mouse.startX),
-        height: Math.abs(this.mouse.y - this.mouse.startY),
-      };
-      this.setRectangle();
-    }
-  }
-
-  private setMousePosition(e: any) {
-    // eslint-disable-next-line import/no-deprecated
-    const ev = e || window.event; // Moz || IE
-    if (ev.pageX) { // Moz
-      this.mouse.x = ev.pageX + window.pageXOffset;
-      this.mouse.y = ev.pageY + window.pageYOffset;
-    } else if (ev.clientX) { // IE
-      this.mouse.x = ev.clientX + document.body.scrollLeft;
-      this.mouse.y = ev.clientY + document.body.scrollTop;
-    }
-  }
-
-  private endCapture() {
-    this.captureZone.style.cursor = 'default';
-    this.isDrawing = false;
-
-    this.captureService
-      .getImage(this.target, false, this.cropDimensions)
-      .pipe(
-        take(1),
-        tap(img => {
-          this.resultImage.emit(img);
-        })
-      ).subscribe();
-
-    this.cropDimensions = {
-      x: 0,
-      y: 0,
-      width: 0,
-      height: 0
-    };
-    this.setRectangle();
-  }
-
 }
