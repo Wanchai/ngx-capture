@@ -32,10 +32,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "projects/ngx-capture/**/*.ts",
-              "projects/ngx-capture/**/*.html"
-            ]
+            "lintFilePatterns": ["projects/ngx-capture/**/*.ts", "projects/ngx-capture/**/*.html"]
           }
         }
       }
@@ -84,13 +81,8 @@
             "polyfills": "projects/demo/src/polyfills.ts",
             "tsConfig": "projects/demo/tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "projects/demo/src/favicon.ico",
-              "projects/demo/src/assets"
-            ],
-            "styles": [
-              "projects/demo/src/styles.scss"
-            ],
+            "assets": ["projects/demo/src/favicon.ico", "projects/demo/src/assets"],
+            "styles": ["projects/demo/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -143,7 +135,6 @@
       }
     }
   },
-  "defaultProject": "ngx-capture",
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }
