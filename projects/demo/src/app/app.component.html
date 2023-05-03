@@ -1,8 +1,10 @@
-<div #screen style="text-align: center" class="content">
+<div #screen style="text-align: center; width: 900px" class="content">
   <h1>Welcome to {{ title }}!</h1>
   <h2>Angular v.{{ version }}</h2>
 
-  <div class="block"></div>
+  <img
+    src="https://images.unsplash.com/photo-1682695797873-aa4cb6edd613?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80"
+  />
   <p>
     One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a
     horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown
@@ -14,12 +16,13 @@
     there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded
     frame.
   </p>
-
-  <div class="block"></div>
 </div>
+
+<button (click)="fullCap()" style="z-index: 100">Full Cap</button>
+<br />
+<button (click)="fullCapWithDownload(screen)" style="z-index: 100">Full Cap With Download</button>
 
 <h2>result :</h2>
 
-<img src="{{ img }}" style="border: 1px red solid" />
-
-<ngx-capture [target]="screen" (resultImage)="saveImage($event)"></ngx-capture>
+<img *ngIf="img" src="{{ img }}" style="border: 1px gray solid" />
+<!-- <ngx-capture [target]="screen" (resultImage)="saveImage($event)"></ngx-capture> -->

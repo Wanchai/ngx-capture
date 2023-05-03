@@ -1,12 +1,13 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
-import { NgxCaptureService } from './ngx-capture.service';
+import { CropDimensions, NgxCaptureService } from './ngx-capture.service';
 
 type Point = {
   x: number;
   y: number;
 };
+
 @Component({
   selector: 'ngx-capture',
   template: `
@@ -22,7 +23,6 @@ export class NgxCaptureComponent implements OnInit {
   @ViewChild('over', { static: true }) overlay: ElementRef;
 
   @Input() target: any;
-
   @Output() resultImage = new EventEmitter<string>();
 
   rect: HTMLElement;
@@ -32,7 +32,7 @@ export class NgxCaptureComponent implements OnInit {
 
   mouseStart: Point = { x: 0, y: 0 };
 
-  cropDimensions = {
+  cropDimensions: CropDimensions = {
     x: 0,
     y: 0,
     width: 0,
@@ -88,7 +88,7 @@ export class NgxCaptureComponent implements OnInit {
     }
   }
 
-  private setMousePosition(e: any, isStart = false) {
+  private setMousePosition(e: any, isStart = false): Point {
     const ev = e || window.event; // Moz || IE
     const mouse: Point = { x: 0, y: 0 };
 

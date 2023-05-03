@@ -2,13 +2,21 @@ import { Injectable } from '@angular/core';
 import html2canvas from 'html2canvas';
 import { from, Observable, of } from 'rxjs';
 
+export interface CropDimensions {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class NgxCaptureService {
-  getImage(screen: HTMLElement, fullCapture?: boolean, cropDimensions?: any): Observable<string> {
+  getImage(screen: HTMLElement, fullCapture?: boolean, cropDimensions?: CropDimensions): Observable<string> {
     let options = {
       logging: false,
+      useCORS: true,
     };
 
     if (!fullCapture && cropDimensions.width > 10 && cropDimensions.height > 10) {
@@ -34,11 +42,13 @@ export class NgxCaptureService {
     );
   }
 
-  // TODO
-  private downloadImage(img: string) {
-    // this.canvas.nativeElement.src = img;
-    // this.downloadLink.nativeElement.href = img;
-    // this.downloadLink.nativeElement.download = 'test.png';
-    // this.downloadLink.nativeElement.click();
+  downloadImage(img: string) {
+    const element = document.createElement('a');
+    element.setAttribute('href', img);
+    element.setAttribute('download', 'capture');
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   }
 }

@@ -2,6 +2,7 @@
 
 Screen capture library for Angular.
 Define a zone and it will capture it and return a string containing a base64 PNG.
+Or download the result file.
 
 [Stackblitz Example](https://stackblitz.com/edit/ngx-capture-example-12)
 
@@ -35,7 +36,7 @@ import { NgxCaptureModule } from 'ngx-capture';
 export class AppModule {}
 ```
 
-Define the screen capture area with a variable (#screen):
+Define the screen capture area with a variable (eg. #screen):
 
 ```html
 <div #screen>
@@ -44,7 +45,11 @@ Define the screen capture area with a variable (#screen):
 </div>
 ```
 
+## The is 4 ways to use this library
+
 ### For a full element capture, use the service:
+
+Each time you call the service, it will capture the whole content of the HTML element marked **#screen**
 
 ```ts
 import { NgxCaptureService } from 'ngx-capture';
@@ -61,16 +66,25 @@ this.captureService.getImage(this.screen.nativeElement, true)
 ```
 
 ### For the entire BODY
-```
-this.captureService.getImage(document.body, true)
-.pipe(
-  tap(img => {
-    console.log(img);
-  })
-).subscribe();
+
+This will capture the full page
+
+```ts
+this.captureService
+  .getImage(document.body, true)
+  .pipe(
+    tap((img) => {
+      console.log(img);
+    })
+  )
+  .subscribe();
 ```
 
 ### To access crop options, use the component
+
+This will allow you to click and drag to select the area you want to capture.
+
+ex: https://ngx-capture-example-component.stackblitz.io
 
 ```ts
 import { Component } from '@angular/core';
@@ -87,4 +101,36 @@ export class AppComponent {
     console.log(img);
   }
 }
+```
+
+### Using crop options freely
+
+This way, you can set a specific area to capture.
+
+```ts
+this.captureService
+  .getImage(this.screen.nativeElement, false, {
+    x: 50,
+    y: 150,
+    width: 50,
+    height: 50,
+  })
+  .pipe(tap((img) => (this.img = img)))
+  .subscribe();
+```
+
+## Download the result directly
+
+Once you have the image as a string, you can pass it to the `downloadImage` method to download it.
+
+```ts
+this.captureService
+  .getImage(document.body, true)
+  .pipe(
+    tap((img) => {
+      console.log(img);
+    }),
+    tap((img) => this.captureService.downloadImage(img))
+  )
+  .subscribe();
 ```

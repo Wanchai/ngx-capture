@@ -1,6 +1,6 @@
 {
   "name": "ngx-capture",
-  "version": "0.12.2",
+  "version": "0.13.0",
   "description": "Screen capture library for Angular",
   "author": "Thomas Malicet",
   "keywords": [
@@ -21,7 +21,7 @@
     "url": "https://github.com/Wanchai/ngx-capture/issues"
   },
   "dependencies": {
-    "html2canvas": "1.3.2",
+    "html2canvas": "1.4.1",
     "@types/html2canvas": "1.0.0"
   },
   "peerDependencies": {
