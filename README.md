@@ -1,7 +1,10 @@
 # NGX-CAPTURE
 
+[![npm version](https://badge.fury.io/js/ngx-capture.svg)](https://badge.fury.io/js/ngx-capture)
+
 Screen capture library for Angular.
 Define a zone and it will capture it and return a string containing a base64 PNG.
+
 Or download the result file.
 
 [Stackblitz Example](https://stackblitz.com/edit/ngx-capture-example-12)
