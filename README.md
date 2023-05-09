@@ -48,7 +48,7 @@ Define the screen capture area with a variable (eg. #screen):
 </div>
 ```
 
-## The is 4 ways to use this library
+## There is 4 ways to use this library
 
 ### For a full element capture, use the service:
 
