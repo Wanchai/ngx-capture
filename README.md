@@ -87,7 +87,7 @@ this.captureService
 
 This will allow you to click and drag to select the area you want to capture.
 
-ex: https://ngx-capture-example-component.stackblitz.io
+ex: [https://ngx-capture-example-component.stackblitz.io](https://stackblitz.com/edit/ngx-capture-example-component?file=src%2Fapp%2Fapp.component.ts)
 
 ```ts
 import { Component } from '@angular/core';
