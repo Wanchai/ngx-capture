@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import html2canvas from 'html2canvas';
-import { from, Observable, of } from 'rxjs';
+import {from, Observable, of} from 'rxjs';
 
 export interface CropDimensions {
   x: number;
@@ -17,10 +17,11 @@ export class NgxCaptureService {
     let options = {
       logging: false,
       useCORS: true,
+      scale: 1
     };
 
     if (!fullCapture && cropDimensions.width > 10 && cropDimensions.height > 10) {
-      options = { ...options, ...cropDimensions };
+      options = {...options, ...cropDimensions};
     } else if (!fullCapture) {
       return of(null);
     }
@@ -29,8 +30,7 @@ export class NgxCaptureService {
       html2canvas(screen, options)
         .then(
           (canv) => {
-            const img = canv.toDataURL('image/png');
-            return img;
+            return canv.toDataURL('image/png');
           },
           (err) => {
             throw new Error(err);
